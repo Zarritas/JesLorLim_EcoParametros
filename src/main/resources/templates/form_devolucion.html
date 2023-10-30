@@ -24,11 +24,11 @@
     <br />
 
     <label id="lab_radio"><b>Radio</b></label><br />
-    <input type="radio" name="genero" id="Femenino" value="f" />
+    <input type="radio" name="genero" id="Femenino" value="f" th:checked="${genero=='masc'}"/>
     <label id="rad_fem" for="Femenino">Femenino</label>
-    <input type="radio" name="genero" id="Masculino" value="f" />
+    <input type="radio" name="genero" id="Masculino" value="f" th:checked="${genero=='masc'}"/>
     <label id="rad_masc" for="Masculino">Masculino</label>
-    <input type="radio" name="genero" id="Otro" value="f" />
+    <input type="radio" name="genero" id="Otro" value="f" th:checked="${genero=='masc'}"/>
     <label id="rad_otro" for="Otro">Otro</label><br />
     <label id="lab_checkbox"><b>Checkbox</b></label>
     <br />
