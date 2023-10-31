@@ -1,4 +1,6 @@
 package org.jeslorlim.ecoparametros.controller;
+import org.jeslorlim.ecoparametros.model.Colecciones;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 @Controller
 @RequestMapping("saludos")
@@ -17,14 +20,23 @@ public class Controlador {
         return "form_devolucion";
     }
     @GetMapping("form")
-    public String devuelveFormulario(){
+    public String devuelveFormulario(Model modelo){
+        Map<String, String> paises = Colecciones.leePaises();
+        Map<String, String> generos = Colecciones.leeGeneros();
+
+//        System.out.println(paises.toString());
+//        System.out.println(generos.toString());
+
+        modelo.addAttribute("lista_paises",paises);
+        modelo.addAttribute("lista_generos",generos);
+
         System.out.println("enviando el formulario al cliente");
         return "formulario";
     }
     @PostMapping("recibeParametros")
     public String recibeParametros(
             Model modelo,
-            @RequestParam("Texto") String Texto,
+            @RequestParam("nombre") String nombre,
             @RequestParam("clave") String clave,
             @RequestParam("pi") String pi,
             @RequestParam("texto_area") String text_area,
@@ -35,8 +47,7 @@ public class Controlador {
             @RequestParam("arch") String archivo,
             @RequestParam(value = "multi_arch",required = false) ArrayList<String> multi_archivo
     ){
-
-        modelo.addAttribute("Texto",Texto);
+        modelo.addAttribute("nombre",nombre);
         modelo.addAttribute("clave",clave);
         modelo.addAttribute("pi",pi);
         modelo.addAttribute("texto_area",text_area);
@@ -47,7 +58,7 @@ public class Controlador {
         modelo.addAttribute("archivo",archivo);
         modelo.addAttribute("multi_archivo",multi_archivo);
 
-        System.out.println("He recibido el parameto nombre: "+Texto);
+        System.out.println("He recibido el parameto nombre: "+nombre);
         System.out.println("He recibido el parameto clave: "+clave);
         System.out.println("Valor de Pi: "+pi);
         System.out.println("He recibido una descripción: "+text_area);
@@ -72,7 +83,10 @@ public class Controlador {
                 System.out.println(s);
             }
         }
+
         System.out.println("coordenadoas de la imagen:");
+        System.out.println("coordenadoas de la imagen:");
+
 
         return "form_devolucion";
     }

@@ -1,16 +1,49 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulario</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
-</head>
-<body>
-<form action="recibeParametros" method="post" >
 
-    <label id="lab_Texto" for="Texto">Texto</label>
-    <input type="text" name="Texto" id="Texto" />
+<html
+        lang="es"
+>
+
+<head>
+
+    <meta
+            charset="UTF-8"
+    >
+
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Formulario
+    </title>
+
+    <link
+            rel="stylesheet"
+            th:href="@{/style.css}"
+    >
+
+</head>
+
+<body>
+
+<form
+        action="recibeParametros"
+        method="post"
+>
+
+    <label
+            id="lab_Texto"
+            for="texto">
+        Nombre
+    </label>
+    <input
+            th:type="text"
+            th:value="${nombre}"
+            id="texto"
+    />
+
     <br />
 
     <label id="lab_clave" for="clave">Texto Contraseña</label>
