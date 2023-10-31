@@ -1,6 +1,5 @@
 package org.jeslorlim.ecoparametros.controller;
 import org.jeslorlim.ecoparametros.model.Colecciones;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,14 +20,19 @@ public class Controlador {
     }
     @GetMapping("form")
     public String devuelveFormulario(Model modelo){
+
         Map<String, String> paises = Colecciones.leePaises();
         Map<String, String> generos = Colecciones.leeGeneros();
+        Map<String, String> aficiones = Colecciones.leeAficiones();
 
 //        System.out.println(paises.toString());
 //        System.out.println(generos.toString());
+//        System.out.println(aficiones.toString());
 
         modelo.addAttribute("lista_paises",paises);
         modelo.addAttribute("lista_generos",generos);
+        modelo.addAttribute("lista_aficiones",aficiones);
+
 
         System.out.println("enviando el formulario al cliente");
         return "formulario";
@@ -39,7 +43,7 @@ public class Controlador {
             @RequestParam("nombre") String nombre,
             @RequestParam("clave") String clave,
             @RequestParam("pi") String pi,
-            @RequestParam("texto_area") String text_area,
+            @RequestParam("descripcion") String descripcion,
             @RequestParam(value = "genero",required = false) String genero,
             @RequestParam(value = "prueba_checkbox",required = false) ArrayList<String> checkbox,
             @RequestParam("Select") String seleccion,
@@ -47,10 +51,12 @@ public class Controlador {
             @RequestParam("arch") String archivo,
             @RequestParam(value = "multi_arch",required = false) ArrayList<String> multi_archivo
     ){
+
+
         modelo.addAttribute("nombre",nombre);
         modelo.addAttribute("clave",clave);
         modelo.addAttribute("pi",pi);
-        modelo.addAttribute("texto_area",text_area);
+        modelo.addAttribute("texto_area",descripcion);
         modelo.addAttribute("genero",genero);
         modelo.addAttribute("checkbox",checkbox);
         modelo.addAttribute("Select",seleccion);
@@ -61,7 +67,7 @@ public class Controlador {
         System.out.println("He recibido el parameto nombre: "+nombre);
         System.out.println("He recibido el parameto clave: "+clave);
         System.out.println("Valor de Pi: "+pi);
-        System.out.println("He recibido una descripción: "+text_area);
+        System.out.println("He recibido una descripción: "+descripcion);
         System.out.println("He recibido el parameto genero: "+genero);
         System.out.println("Checkbox");
         if (checkbox != null) {

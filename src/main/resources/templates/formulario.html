@@ -81,14 +81,29 @@
 
             <br/>
 
-            <th:block th:each="generos : ${lista_generos}">
-                <input type="radio" th:id="'rad_'+${generos.getValue()}" th:value="${generos.getKey()}"/>
-                <label th:id="'lab_'+${generos.getValue()}" th:for="'rad_'+${generos.getValue()}">
-                    <th:block th:text="${generos.getValue()}"/>
+            <th:block
+                    th:each="generos : ${lista_generos}"
+            >
+                <input
+                        type="radio"
+                        th:id="'rad_'+${generos.getValue()}"
+                        th:value="${generos.getKey()}"
+                />
+                <label
+                        th:id="'lab_'+${generos.getValue()}"
+                        th:for="'rad_'+${generos.getValue()}"
+                >
+                    <th:block
+                            th:text="${generos.getValue()}"
+                    />
                 </label>
             </th:block>
+
             <br/>
 
+            <th:block th:each="aficiones : ${lista_aficiones}">
+                <input type="checkbox" name="aficiones" id="aficion+${}" value="1"/><label for="checkbox_1">1</label>
+            </th:block>
             <input type="checkbox" name="prueba_checkbox" id="checkbox_1" value="1"/><label for="checkbox_1">1</label>
             <input type="checkbox" name="prueba_checkbox" id="checkbox_2" value="2"/><label for="checkbox_2">2</label>
             <input type="checkbox" name="prueba_checkbox" id="checkbox_3" value="3"/><label for="checkbox_3">3</label>
@@ -116,7 +131,7 @@
             <input type="file" multiple="multiple" id="multi_arch" name="multi_arch"/><br/>
 
             <input type="image" name="imagen" th:src="@{/img/Sin título.jpeg}" width="200px" height="200px"
-                   alt="imagen de envio" id="btn_img"/>
+                   alt="imagen de envio" id="btn_img"/><br />
 
             <input type="submit" id="btn_enviar"/>
 
