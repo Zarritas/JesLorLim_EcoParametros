@@ -33,43 +33,74 @@
         method="post"
 >
 
-    <label
-            id="lab_Texto"
-            for="texto">
+    <label id="lab_nombre"
+            for="nombre">
         Nombre
     </label>
-    <input
-            th:type="text"
+    <input id="nombre"
+            th:type="texto"
             th:value="${nombre}"
-            id="texto"
     />
 
     <br />
 
-    <label id="lab_clave" for="clave">Texto Contraseña</label>
-    <input type="password" name="clave" id="clave" />
+    <label id="lab_clave"
+           for="clave"
+    >
+        Contraseña:
+    </label>
+    <input id="clave"
+            th:type="password"
+            th:value="${clave}"
+    />
+
     <br />
 
-    <input type="hidden" name="pi" id="pi" value="3.1415"/>
+    <input id="pi"
+            type="hidden"
+            name="pi"
+            th:value="${pi}"
+    />
 
-    <label id="lab_texto_area" for="texto_area">Text Area</label>
-    <textarea name="texto_area" id="texto_area" placeholder="hola"></textarea>
+    <textarea id="descripcion"
+              name="descripcion"
+              placeholder="descripcion"
+              th:text="${descripcion}"
+    >
+    </textarea>
+
     <br />
 
-    <label id="lab_radio"><b>Radio</b></label><br />
-    <input type="radio" name="genero" id="Femenino" value="f" th:checked="${genero=='masc'}"/>
-    <label id="rad_fem" for="Femenino">Femenino</label>
-    <input type="radio" name="genero" id="Masculino" value="f" th:checked="${genero=='masc'}"/>
-    <label id="rad_masc" for="Masculino">Masculino</label>
-    <input type="radio" name="genero" id="Otro" value="f" th:checked="${genero=='masc'}"/>
-    <label id="rad_otro" for="Otro">Otro</label><br />
-    <label id="lab_checkbox"><b>Checkbox</b></label>
+    <th:block th:each="genero : ${lista_generos}">
+        <input th:id="'rad_'+${genero.value}"
+               type="radio"
+               name="generoSeleccionado"
+               th:value="${genero.key}"
+               th:checked="${genero.key==generoSeleccionado}"
+        />
+        <label th:id="'lab_'+${genero.value}"
+               th:for="'rad_'+${genero.value}"
+        >
+            <th:block th:text="${genero.value}"/>
+        </label>
+    </th:block>
+
     <br />
 
-    <input type="checkbox" name="prueba_checkbox" id="checkbox_1" value="1" /><label for="checkbox_1">1</label>
-    <input type="checkbox" name="prueba_checkbox" id="checkbox_2" value="2" /><label for="checkbox_2">2</label>
-    <input type="checkbox" name="prueba_checkbox" id="checkbox_3" value="3" /><label for="checkbox_3">3</label>
-    <input type="checkbox" name="prueba_checkbox" id="checkbox_4" value="4" /><label for="checkbox_4">4</label>
+    <th:block th:each="aficion : ${lista_aficiones}">
+        <input th:id="'check_'+${aficion.value}"
+               type="checkbox"
+               name="aficionesSeleccionadas"
+               th:value="${aficion.key}"
+               th:checked="${aficion.equals(aficionesSeleccionadas)}"
+        />
+        <label th:id="'lab_'+${aficion.value}"
+               th:for="'check_'+${aficion.value}"
+        >
+            <th:block th:text="${aficion.value}"/>
+        </label>
+    </th:block>
+
     <br />
 
     <label id="lab_select" for="select">Selección</label>
@@ -79,6 +110,7 @@
         <option value="3" selected="selected">3</option>
         <option value="4">4</option>
     </select>
+
     <br />
 
     <label id="lab_select_multi" for="select_multi">Selección multiple</label>
@@ -87,17 +119,13 @@
         <option value="2">2</option>
         <option value="3" selected="selected">3</option>
         <option value="4">4</option>
-    </select><br />
+    </select>
 
-    <label id="lab_archivo" for="arch">Archivo</label>
-    <input type="file" id="arch" name="arch"/>
     <br />
 
-    <label id="lab_multi_arch" for="multi_arch">Varios archivos</label>
-    <input type="file" multiple="multiple" id="multi_arch" name="multi_arch"/>
-    <br />
 
     <input type="image" name="imagen" th:src="@{/img/Sin título.jpeg}" width="200px" height="200px" alt="imagen de envio" id="btn_img"/>
+
     <br />
 
     <input type="submit" id="btn_enviar" />

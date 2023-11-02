@@ -1,5 +1,6 @@
 package org.jeslorlim.ecoparametros.controller;
 import org.jeslorlim.ecoparametros.model.Colecciones;
+import org.jeslorlim.ecoparametros.model.Formulario;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,18 +22,10 @@ public class Controlador {
     @GetMapping("form")
     public String devuelveFormulario(Model modelo){
 
-        Map<String, String> paises = Colecciones.leePaises();
-        Map<String, String> generos = Colecciones.leeGeneros();
-        Map<String, String> aficiones = Colecciones.leeAficiones();
-
-//        System.out.println(paises.toString());
-//        System.out.println(generos.toString());
-//        System.out.println(aficiones.toString());
-
-        modelo.addAttribute("lista_paises",paises);
-        modelo.addAttribute("lista_generos",generos);
-        modelo.addAttribute("lista_aficiones",aficiones);
-
+        modelo.addAttribute("lista_paises",Colecciones.leePaises());
+        modelo.addAttribute("lista_generos",Colecciones.leeGeneros());
+        modelo.addAttribute("lista_aficiones",Colecciones.leeAficiones());
+        modelo.addAttribute("lista_musicas",Colecciones.leeMusica());
 
         System.out.println("enviando el formulario al cliente");
         return "formulario";
@@ -44,56 +37,35 @@ public class Controlador {
             @RequestParam("clave") String clave,
             @RequestParam("pi") String pi,
             @RequestParam("descripcion") String descripcion,
-            @RequestParam(value = "genero",required = false) String genero,
-            @RequestParam(value = "prueba_checkbox",required = false) ArrayList<String> checkbox,
+            @RequestParam(value = "generoSeleccionado",required = false) String generoSeleccionado,
+            @RequestParam(value = "aficionesSeleccionadas",required = false) ArrayList<String> aficionesSeleccionadas,
             @RequestParam("Select") String seleccion,
-            @RequestParam(value = "Select_multiple",required = false) ArrayList<String> select_multiple,
-            @RequestParam("arch") String archivo,
-            @RequestParam(value = "multi_arch",required = false) ArrayList<String> multi_archivo
+            @RequestParam(value = "Select_multiple",required = false) ArrayList<String> select_multiple
     ){
-
+        modelo.addAttribute("lista_paises",Colecciones.leePaises());
+        modelo.addAttribute("lista_generos",Colecciones.leeGeneros());
+        modelo.addAttribute("lista_aficiones",Colecciones.leeAficiones());
+        modelo.addAttribute("lista_musicas",Colecciones.leeMusica());
 
         modelo.addAttribute("nombre",nombre);
         modelo.addAttribute("clave",clave);
         modelo.addAttribute("pi",pi);
-        modelo.addAttribute("texto_area",descripcion);
-        modelo.addAttribute("genero",genero);
-        modelo.addAttribute("checkbox",checkbox);
+        modelo.addAttribute("descripcion",descripcion);
+        modelo.addAttribute("generoSeleccionado",generoSeleccionado);
+        modelo.addAttribute("aficionSeleccionado",aficionesSeleccionadas);
         modelo.addAttribute("Select",seleccion);
         modelo.addAttribute("select_nultiple",select_multiple);
-        modelo.addAttribute("archivo",archivo);
-        modelo.addAttribute("multi_archivo",multi_archivo);
-
-        System.out.println("He recibido el parameto nombre: "+nombre);
-        System.out.println("He recibido el parameto clave: "+clave);
-        System.out.println("Valor de Pi: "+pi);
-        System.out.println("He recibido una descripción: "+descripcion);
-        System.out.println("He recibido el parameto genero: "+genero);
-        System.out.println("Checkbox");
-        if (checkbox != null) {
-            for (String s : checkbox){
-                System.out.println(s);
-            }
-        }
-        System.out.println("He recibido el parameto selección: "+seleccion);
-        System.out.println("MultiSelección");
-        if (select_multiple != null) {
-            for (String s : select_multiple) {
-                System.out.println(s);
-            }
-        }
-        System.out.println("He recibido el parameto archivo: "+archivo);
-        System.out.println("Multiarchivos");
-        if (multi_archivo != null) {
-            for (String s : multi_archivo) {
-                System.out.println(s);
-            }
-        }
-
-        System.out.println("coordenadoas de la imagen:");
-        System.out.println("coordenadoas de la imagen:");
-
 
         return "form_devolucion";
+    }
+    @PostMapping("recibeParametrosObjeto")
+    public String recibeParametros(
+            Model modelo, Formulario datosFormulario){
+        modelo.addAttribute("form",datosFormulario);
+        modelo.addAttribute("lista_paises",Colecciones.leePaises());
+        modelo.addAttribute("lista_generos",Colecciones.leeGeneros());
+        modelo.addAttribute("lista_aficiones",Colecciones.leeAficiones());
+        modelo.addAttribute("lista_musicas",Colecciones.leeMusica());
+        return "form_devolucion_obj";
     }
 }

@@ -33,14 +33,12 @@
                 method="post"
         >
 
-            <label
-                    id="lab_nombre"
+            <label id="lab_nombre"
                     for="nombre"
             >
                 Nombre:
             </label>
-            <input
-                    id="nombre"
+            <input id="nombre"
                     name="nombre"
                     type="text"
                     value="Jesús"
@@ -48,96 +46,127 @@
 
             <br/>
 
-            <label
-                    id="lab_clave"
+            <label id="lab_clave"
                     for="clave"
             >
                 Contraseña:
             </label>
-            <input
-                    id="clave"
+            <input id="clave"
                     type="password"
                     name="clave"
             />
 
             <br/>
 
-            <input
+            <input id="pi"
                     type="hidden"
-                    name="pi" id="pi"
+                    name="pi"
                     value="3.1415"
             />
 
-            <label
-                    id="lab_descripcion"
-                    for="descripcion">
-                Text Area
-            </label>
-            <textarea
+            <textarea id="descripcion"
                     name="descripcion"
-                    id="descripcion"
-                    placeholder="hola"
+                    placeholder="descripcion"
             ></textarea>
 
             <br/>
-
-            <th:block
-                    th:each="generos : ${lista_generos}"
+            <label id="lab_fnac"
+                   for="fnac"
             >
-                <input
+                Nombre:
+            </label>
+            <input id="fnac"
+                   name="fnac"
+                   type="text"
+                   placeholder="fecha de nacimiento"
+            />
+            <br>
+            <th:block th:each="genero : ${lista_generos}">
+                <input th:id="'rad_'+${genero.value}"
                         type="radio"
-                        th:id="'rad_'+${generos.getValue()}"
-                        th:value="${generos.getKey()}"
+                        name="generoSeleccionado"
+                        th:value="${genero.key}"
                 />
-                <label
-                        th:id="'lab_'+${generos.getValue()}"
-                        th:for="'rad_'+${generos.getValue()}"
+                <label th:id="'lab_'+${genero.value}"
+                        th:for="'rad_'+${genero.value}"
                 >
-                    <th:block
-                            th:text="${generos.getValue()}"
-                    />
+                    <th:block th:text="${genero.value}"/>
                 </label>
             </th:block>
 
             <br/>
 
-            <th:block th:each="aficiones : ${lista_aficiones}">
-                <input type="checkbox" name="aficiones" id="aficion+${}" value="1"/><label for="checkbox_1">1</label>
+            <th:block th:each="aficion : ${lista_aficiones}">
+                <input th:id="'aficion_'+${aficion.getValue()}"
+                        type="checkbox"
+                        name="aficionesSelecionadas"
+                        th:value="${aficion.getKey()}"
+                />
+                <label th:for="'aficion_'+${aficion.getValue()}"
+                >
+                    <th:block th:text="${aficion.getValue()}"/>
+                </label>
             </th:block>
-            <input type="checkbox" name="prueba_checkbox" id="checkbox_1" value="1"/><label for="checkbox_1">1</label>
-            <input type="checkbox" name="prueba_checkbox" id="checkbox_2" value="2"/><label for="checkbox_2">2</label>
-            <input type="checkbox" name="prueba_checkbox" id="checkbox_3" value="3"/><label for="checkbox_3">3</label>
-            <input type="checkbox" name="prueba_checkbox" id="checkbox_4" value="4"/><label for="checkbox_4">4</label>
+
+            <br />
+
+            <label id="lab_select"
+                    for="select"
+            >
+                Paises
+            </label>
+            <select id="select"
+                    name="Select"
+            >
+                <option th:id="${paises.getKey()}"
+                        th:each="paises : ${lista_paises}"
+                        th:value="${paises.getKey()}"
+                        th:text="${paises.getValue()}"
+                ></option>
+            </select>
+
             <br/>
 
-            <label id="lab_select" for="select">Selección</label>
-            <select id="select" name="Select">
-                <option th:each="paises : ${lista_paises}" th:value="${paises.getKey()}"
-                        th:text="${paises.getValue()}"></option>
-            </select><br/>
+            <label id="lab_select_multiple"
+                    for="select_multiple"
+            >
+                Géneros de Música
+            </label>
+            <select id="select_multiple"
+                    name="Select"
+                    multiple="multiple"
+            >
+                <option th:id="${musica.getKey()}"
+                        th:each="musica : ${lista_musica}"
+                        th:value="${musica.getKey()}"
+                        th:text="${musica.getValue()}"
+                ></option>
+            </select>
 
-            <label id="lab_select_multi" for="select_multi">Selección multiple</label>
-            <select name="Select_multiple" id="select_multi" multiple="multiple">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3" selected="selected">3</option>
-                <option value="4">4</option>
-            </select><br/>
+            <br/>
 
-            <label id="lab_archivo" for="arch">Archivo</label>
-            <input type="file" id="arch" name="arch"/><br/>
+            <input id="btn_img"
+                    type="image"
+                    name="imagen"
+                    th:src="@{/img/Sin título.jpeg}"
+                    width="200px"
+                    height="200px"
+                    alt="imagen de envio"
+            />
 
-            <label id="lab_multi_arch" for="multi_arch">Varios archivos</label>
-            <input type="file" multiple="multiple" id="multi_arch" name="multi_arch"/><br/>
+            <br />
 
-            <input type="image" name="imagen" th:src="@{/img/Sin título.jpeg}" width="200px" height="200px"
-                   alt="imagen de envio" id="btn_img"/><br />
+            <input id="btn_enviar"
+                    type="submit"
+            />
 
-            <input type="submit" id="btn_enviar"/>
+            <input id="btn_reset"
+                    type="reset"
+            />
 
-            <input type="reset" id="btn_reset"/>
-
-            <button id="boton">Botón</button>
+            <button id="boton">
+                Botón
+            </button>
 
         </form>
 

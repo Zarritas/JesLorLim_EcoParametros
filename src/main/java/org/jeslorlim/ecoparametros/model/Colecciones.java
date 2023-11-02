@@ -8,8 +8,8 @@ import java.util.Map;
 public class Colecciones {
     private static final Map<String, String> paises = new HashMap<>();
     private static final Map<String, String> generos = new HashMap<>();
-
     private static final Map<String, String> aficiones = new HashMap<>();
+    private static final Map<String, String> musica = new HashMap<>();
 
 
     static {
@@ -26,6 +26,11 @@ public class Colecciones {
         aficiones.put("C","Comer");
         aficiones.put("V","Videojuegos");
         aficiones.put("D","Dormir");
+
+        musica.put("H","Hip-Hop");
+        musica.put("P","Pop");
+        musica.put("J","Jazz");
+        musica.put("R","Reaggeton");
     }
 
     public static Map<String, String> leePaises() {
@@ -36,6 +41,9 @@ public class Colecciones {
     }
     public static Map<String, String> leeAficiones() {
         return aficiones;
+    }
+    public static Map<String, String> leeMusica() {
+        return musica;
     }
 
 }
