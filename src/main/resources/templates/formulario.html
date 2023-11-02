@@ -70,6 +70,7 @@
             ></textarea>
 
             <br/>
+
             <label id="lab_fnac"
                    for="fnac"
             >
@@ -80,7 +81,9 @@
                    type="text"
                    placeholder="fecha de nacimiento"
             />
+
             <br>
+
             <th:block th:each="genero : ${lista_generos}">
                 <input th:id="'rad_'+${genero.value}"
                         type="radio"
@@ -97,49 +100,49 @@
             <br/>
 
             <th:block th:each="aficion : ${lista_aficiones}">
-                <input th:id="'aficion_'+${aficion.getValue()}"
+                <input th:id="'aficion_'+${aficion.key}"
                         type="checkbox"
                         name="aficionesSelecionadas"
-                        th:value="${aficion.getKey()}"
+                        th:value="${aficion.key}"
                 />
-                <label th:for="'aficion_'+${aficion.getValue()}"
+                <label th:for="'aficion_'+${aficion.value}"
                 >
-                    <th:block th:text="${aficion.getValue()}"/>
+                    <th:block th:text="${aficion.value}"/>
                 </label>
             </th:block>
 
             <br />
 
-            <label id="lab_select"
-                    for="select"
+            <label id="lab_pais"
+                    for="pais"
             >
                 Paises
             </label>
-            <select id="select"
-                    name="Select"
+            <select id="pais"
+                    name="paisSeleccionado"
             >
-                <option th:id="${paises.getKey()}"
-                        th:each="paises : ${lista_paises}"
-                        th:value="${paises.getKey()}"
-                        th:text="${paises.getValue()}"
+                <option th:id="${paise.value}"
+                        th:each="paise : ${lista_paises}"
+                        th:value="${paise.key}"
+                        th:text="${paise.value}"
                 ></option>
             </select>
 
             <br/>
 
-            <label id="lab_select_multiple"
-                    for="select_multiple"
+            <label id="lab_musica"
+                    for="musica"
             >
                 Géneros de Música
             </label>
-            <select id="select_multiple"
-                    name="Select"
+            <select id="musica"
+                    name="musicasSeleccionadas"
                     multiple="multiple"
             >
-                <option th:id="${musica.getKey()}"
-                        th:each="musica : ${lista_musica}"
-                        th:value="${musica.getKey()}"
-                        th:text="${musica.getValue()}"
+                <option th:id="${musica.value}"
+                        th:each="musica : ${lista_musicas}"
+                        th:value="${musica.key}"
+                        th:text="${musica.value}"
                 ></option>
             </select>
 

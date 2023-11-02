@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 @Controller
 @RequestMapping("saludos")
@@ -39,8 +38,8 @@ public class Controlador {
             @RequestParam("descripcion") String descripcion,
             @RequestParam(value = "generoSeleccionado",required = false) String generoSeleccionado,
             @RequestParam(value = "aficionesSeleccionadas",required = false) ArrayList<String> aficionesSeleccionadas,
-            @RequestParam("Select") String seleccion,
-            @RequestParam(value = "Select_multiple",required = false) ArrayList<String> select_multiple
+            @RequestParam(value = "paisSeleccionado",required = false) String paisSeleccionado,
+            @RequestParam(value = "musicasSeleccionada",required = false) ArrayList<String> musicasSeleccionada
     ){
         modelo.addAttribute("lista_paises",Colecciones.leePaises());
         modelo.addAttribute("lista_generos",Colecciones.leeGeneros());
@@ -52,9 +51,9 @@ public class Controlador {
         modelo.addAttribute("pi",pi);
         modelo.addAttribute("descripcion",descripcion);
         modelo.addAttribute("generoSeleccionado",generoSeleccionado);
-        modelo.addAttribute("aficionSeleccionado",aficionesSeleccionadas);
-        modelo.addAttribute("Select",seleccion);
-        modelo.addAttribute("select_nultiple",select_multiple);
+        modelo.addAttribute("aficionesSeleccionadas",aficionesSeleccionadas);
+        modelo.addAttribute("paisSeleccionado",paisSeleccionado);
+        modelo.addAttribute("musicasSeleccionadas", musicasSeleccionada);
 
         return "form_devolucion";
     }

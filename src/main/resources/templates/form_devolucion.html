@@ -4,136 +4,165 @@
         lang="es"
 >
 
-<head>
+    <head>
 
-    <meta
-            charset="UTF-8"
-    >
-
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Formulario
-    </title>
-
-    <link
-            rel="stylesheet"
-            th:href="@{/style.css}"
-    >
-
-</head>
-
-<body>
-
-<form
-        action="recibeParametros"
-        method="post"
->
-
-    <label id="lab_nombre"
-            for="nombre">
-        Nombre
-    </label>
-    <input id="nombre"
-            th:type="texto"
-            th:value="${nombre}"
-    />
-
-    <br />
-
-    <label id="lab_clave"
-           for="clave"
-    >
-        Contraseña:
-    </label>
-    <input id="clave"
-            th:type="password"
-            th:value="${clave}"
-    />
-
-    <br />
-
-    <input id="pi"
-            type="hidden"
-            name="pi"
-            th:value="${pi}"
-    />
-
-    <textarea id="descripcion"
-              name="descripcion"
-              placeholder="descripcion"
-              th:text="${descripcion}"
-    >
-    </textarea>
-
-    <br />
-
-    <th:block th:each="genero : ${lista_generos}">
-        <input th:id="'rad_'+${genero.value}"
-               type="radio"
-               name="generoSeleccionado"
-               th:value="${genero.key}"
-               th:checked="${genero.key==generoSeleccionado}"
-        />
-        <label th:id="'lab_'+${genero.value}"
-               th:for="'rad_'+${genero.value}"
+        <meta
+                charset="UTF-8"
         >
-            <th:block th:text="${genero.value}"/>
-        </label>
-    </th:block>
 
-    <br />
-
-    <th:block th:each="aficion : ${lista_aficiones}">
-        <input th:id="'check_'+${aficion.value}"
-               type="checkbox"
-               name="aficionesSeleccionadas"
-               th:value="${aficion.key}"
-               th:checked="${aficion.equals(aficionesSeleccionadas)}"
-        />
-        <label th:id="'lab_'+${aficion.value}"
-               th:for="'check_'+${aficion.value}"
+        <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
         >
-            <th:block th:text="${aficion.value}"/>
-        </label>
-    </th:block>
 
-    <br />
+        <title>
+            Formulario
+        </title>
 
-    <label id="lab_select" for="select">Selección</label>
-    <select id="select" name="Select">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3" selected="selected">3</option>
-        <option value="4">4</option>
-    </select>
+        <link
+                rel="stylesheet"
+                th:href="@{/style.css}"
+        >
 
-    <br />
+    </head>
 
-    <label id="lab_select_multi" for="select_multi">Selección multiple</label>
-    <select name="Select_multiple" id="select_multi" multiple="multiple">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3" selected="selected">3</option>
-        <option value="4">4</option>
-    </select>
+    <body>
 
-    <br />
+        <form
+                action="recibeParametros"
+                method="post"
+        >
 
+            <label id="lab_nombre"
+                    for="nombre">
+                Nombre
+            </label>
+            <input id="nombre"
+                    th:type="texto"
+                    th:value="${nombre}"
+            />
 
-    <input type="image" name="imagen" th:src="@{/img/Sin título.jpeg}" width="200px" height="200px" alt="imagen de envio" id="btn_img"/>
+            <br />
 
-    <br />
+            <label id="lab_clave"
+                   for="clave"
+            >
+                Contraseña:
+            </label>
+            <input id="clave"
+                    th:type="password"
+                    th:value="${clave}"
+            />
 
-    <input type="submit" id="btn_enviar" />
+            <br />
 
-    <input type="reset" id="btn_reset" />
+            <input id="pi"
+                    type="hidden"
+                    name="pi"
+                    th:value="${pi}"
+            />
 
-    <button id="boton">Botón</button>
+            <textarea id="descripcion"
+                      name="descripcion"
+                      placeholder="descripcion"
+                      th:text="${descripcion}"
+            >
+            </textarea>
 
-</form>
-</body>
+            <br />
+
+            <th:block th:each="genero : ${lista_generos}">
+                <input th:id="'rad_'+${genero.value}"
+                       type="radio"
+                       name="generoSeleccionado"
+                       th:value="${genero.key}"
+                       th:checked="${genero.key==generoSeleccionado}"
+                />
+                <label th:id="'lab_'+${genero.value}"
+                       th:for="'rad_'+${genero.value}"
+                >
+                    <th:block th:text="${genero.value}"/>
+                </label>
+            </th:block>
+
+            <br />
+
+            <th:block th:each="aficion : ${lista_aficiones}">
+                <input th:id="'check_'+${aficion.value}"
+                       type="checkbox"
+                       name="aficionesSeleccionadas"
+                       th:value="${aficion.key}"
+                       th:checked="${#lists.contains(aficionesSeleccionadas,aficion.key)}"
+
+                />
+                <label th:id="'lab_'+${aficion.value}"
+                       th:for="'check_'+${aficion.value}"
+                >
+                    <th:block th:text="${aficion.value}"/>
+                </label>
+            </th:block>
+
+            <br />
+
+            <label id="lab_pais"
+                   for="pais"
+            >
+                Paises
+            </label>
+            <select id="pais"
+                    name="paisSeleccionados"
+            >
+                <option th:id="${pais.value}"
+                        th:each="pais : ${lista_paises}"
+                        th:value="${pais.key}"
+                        th:text="${pais.value}"
+                        th:selected="${#lists.contains(paisSeleccionado,pais.key)}"
+                ></option>
+            </select>
+
+            <br />
+
+            <label id="lab_musica"
+                   for="musicas"
+            >
+                Géneros de Música
+            </label>
+            <select id="musicas"
+                    name="musicasSeleccionadas"
+                    multiple="multiple"
+            >
+                <option th:id="${musica.value}"
+                        th:each="musica : ${lista_musicas}"
+                        th:value="${musica.key}"
+                        th:text="${musica.value}"
+                ></option>
+            </select>
+
+            <br />
+
+            <input id="btn_img"
+                   type="image"
+                   name="imagen"
+                   th:src="@{/img/Sin título.jpeg}"
+                   width="200px"
+                   height="200px"
+                   alt="imagen de envio"
+            />
+
+            <br />
+
+            <input id="btn_enviar"
+                   type="submit"
+            />
+
+            <input id="btn_reset"
+                   type="reset"
+            />
+
+            <button id="boton">
+                Botón
+            </button>
+
+        </form>
+    </body>
 </html>
