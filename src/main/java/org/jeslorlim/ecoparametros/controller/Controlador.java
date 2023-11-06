@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Map;
 
 @Controller
 @RequestMapping("saludos")
@@ -18,17 +20,36 @@ public class Controlador {
         System.out.println("Hola mundo!!");
         return "form_devolucion";
     }
-    @GetMapping("form")
-    public String devuelveFormulario(Model modelo){
 
-        modelo.addAttribute("lista_paises",Colecciones.leePaises());
-        modelo.addAttribute("lista_generos",Colecciones.leeGeneros());
-        modelo.addAttribute("lista_aficiones",Colecciones.leeAficiones());
-        modelo.addAttribute("lista_musicas",Colecciones.leeMusica());
+
+    @GetMapping("form")
+    public String formulario(Model modelo){
+//      Colecciones
+        Map<String,String> paises = Colecciones.leePaises();
+        Map<String,String> generos = Colecciones.leeGeneros();
+        Map<String,String> aficiones = Colecciones.leeAficiones();
+        Map<String,String> musicas = Colecciones.leeMusica();
+
+//      Valores por defecto
+        Formulario formulario = new Formulario();
+        formulario.setNombre("Jesús");
+        formulario.setMusicas(Arrays.asList("H","P"));
+        formulario.setPais("E");
+        formulario.setDescripcion("Hola a todos");
+        formulario.setGenero("O");
+
+//      Pasamos datos al formulario
+        modelo.addAttribute("lista_paises",paises);
+        modelo.addAttribute("lista_generos",generos);
+        modelo.addAttribute("lista_aficiones",aficiones);
+        modelo.addAttribute("lista_musicas",musicas);
+        modelo.addAttribute("formulario",formulario);
 
         System.out.println("enviando el formulario al cliente");
         return "formulario";
     }
+
+
     @PostMapping("recibeParametros")
     public String recibeParametros(
             Model modelo,
@@ -57,6 +78,7 @@ public class Controlador {
 
         return "form_devolucion";
     }
+
     @PostMapping("recibeParametrosObjeto")
     public String recibeParametros(
             Model modelo, Formulario datosFormulario){
