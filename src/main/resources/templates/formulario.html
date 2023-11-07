@@ -21,19 +21,19 @@
 
     <link
             rel="stylesheet"
-            th:href="@{/style.css}"
+            th:href="@{/css/style.css}"
     >
 
 </head>
 
 <body>
-
+<h1>Formulario</h1>
+<h3 th:text="${mensaje}" class="error"/>
 <form
-        action="recibeParametros"
+        action="recibeParametrosObjeto"
         method="post"
         th:object="${formulario}"
 >
-
     <label id="lab_nombre"
            for="nombre"
     >
@@ -41,7 +41,11 @@
     </label>
     <input th:field="*{nombre}"
            type="text"
+           th:value="${nombre}"
     />
+    <th:block th:each="error : ${#fields.errors('nombre')}">
+        <div th:text="${error}" class="error"/>
+    </th:block>
 
     <br/>
 
@@ -52,31 +56,52 @@
     </label>
     <input th:field="*{clave}"
            type="password"
+           th:value="${clave}"
     />
+    <th:block th:each="error : ${#fields.errors('clave')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
+
+    <br/>
+    <label id="lab_fecha" for="fecha">Fecha de Nacimiento</label>
+    <input type="text" th:field="*{fecha}">
+    <th:block th:each="error : ${#fields.errors('fecha')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
 
     <br/>
 
-    <input id="pi"
-           type="hidden"
-           name="pi"
-           value="3.1415"
+    <label id="lab_puntuacion"
+            for="puntuacion">
+        Puntuación
+    </label>
+    <input th:field="*{puntuacion}"
+            type="text"
     />
+    <th:block th:each="error : ${#fields.errors('puntuacion')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
 
+    <br/>
+
+    <label id="lab_edad" for="edad">Edad</label>
+    <input type="text" th:field="*{edad}">
+    <th:block th:each="error : ${#fields.errors('edad')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
+
+    <br/>
+
+    <input type="hidden" th:field="*{pi}"/>
+
+    <label id="lab_descripcion" for="descripcion">Descripcion</label>
     <textarea th:field="*{descripcion}"
     ></textarea>
+    <th:block th:each="error : ${#fields.errors('descripcion')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
 
     <br/>
-
-    <!--/*            <label id="lab_fnac"
-                       for="fnac"
-                        Nombre:</label>
-                       <input id="fnac"
-                     name="fnac"
-                      type="text"
-                      placeholder="fecha de nacimiento"
-
-
-               <br>*/-->
 
     <th:block th:each="genero,indice : ${lista_generos}">
         <input th:id="'genero_'+${indice.count}"
@@ -90,19 +115,25 @@
             <th:block th:text="${genero.value}"/>
         </label>
     </th:block>
+    <th:block th:each="error : ${#fields.errors('genero')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
 
     <br/>
 
     <th:block th:each="aficion,indice : ${lista_aficiones}">
-        <input th:id="'aficion_'+${indice.count}"
+        <input th:field="*{aficiones}"
                type="checkbox"
-               name="aficionesSelecionadas"
+               th:id="'aficion_'+${indice.count}"
                th:value="${aficion.key}"
         />
         <label th:for="'aficion_'+${indice.count}"
         >
             <th:block th:text="${aficion.value}"/>
         </label>
+    </th:block>
+    <th:block th:each="error : ${#fields.errors('aficiones')}">
+        <div th:text="${error}" class="error"></div>
     </th:block>
 
     <br/>
@@ -118,8 +149,12 @@
                 th:each="paise : ${lista_paises}"
                 th:value="${paise.key}"
                 th:text="${paise.value}"
+
         ></option>
     </select>
+    <th:block th:each="error : ${#fields.errors('pais')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
 
     <br/>
 
@@ -137,6 +172,9 @@
                 th:text="${musica.value}"
         ></option>
     </select>
+    <th:block th:each="error : ${#fields.errors('musicas')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
 
     <br/>
 

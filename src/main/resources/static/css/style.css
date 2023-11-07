@@ -1,0 +1,14 @@
+body{
+    background-color: darkslategrey;
+}
+
+label{
+    color: cadetblue;
+    font-size: larger;
+}
+
+.error{
+    color: red;
+    font-size: large;
+    font-weight: bold;
+}
