@@ -62,8 +62,9 @@
 
     <br/>
     <label id="lab_fecha"
-            for="fecha"
-    />
+            for="fecha">
+        Fecha de nacimiento:
+    </label>
     <input type="text" th:field="*{fecha}">
     <th:block th:each="error : ${#fields.errors('fecha')}">
         <div th:text="${error}" class="error"></div>

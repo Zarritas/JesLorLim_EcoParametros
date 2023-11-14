@@ -1,4 +1,5 @@
 package org.jeslorlim.ecoparametros.controller;
+import jakarta.validation.Valid;
 import org.jeslorlim.ecoparametros.model.Colecciones;
 import org.jeslorlim.ecoparametros.model.Formulario;
 import org.springframework.stereotype.Controller;
@@ -33,11 +34,6 @@ public class Controlador {
 
 //      Valores por defecto
         Formulario formulario = new Formulario();
-        formulario.setNombre("Jesús");
-        formulario.setMusicas(Arrays.asList("H","P"));
-        formulario.setPais("E");
-        formulario.setDescripcion("Hola a todos");
-        formulario.setGenero("O");
 
 //      Pasamos datos al formulario
         modelo.addAttribute("lista_paises",paises);
@@ -51,7 +47,9 @@ public class Controlador {
     }
 
     @PostMapping("recibeParametrosObjeto")
-    public String recibeParametros(Model modelo, Formulario datosFormulario, BindingResult resultadoVinculadoParametros){
+    public String recibeParametros(Model modelo,
+                                   @Valid Formulario datosFormulario,
+                                   BindingResult resultadoVinculadoParametros){
 
         String mensajeEnFormulario;
         if (resultadoVinculadoParametros.hasErrors()) {
