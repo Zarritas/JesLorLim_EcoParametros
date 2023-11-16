@@ -4,36 +4,21 @@
         lang="es"
 >
 
-<head>
-
-    <meta
-            charset="UTF-8"
-    >
-
-    <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Formulario
-    </title>
-
-    <link
-            rel="stylesheet"
-            th:href="@{/css/style.css}"
-    >
-
-</head>
+<head th:replace="Fragmentos/head"></head>
 
 <body>
-<h1>Formulario</h1>
+<header th:replace="Fragmentos/header"> </header>
+
 <h3 th:text="${mensaje}" class="error"/>
 <form
         action="recibeParametrosObjeto"
         method="post"
         th:object="${formulario}"
 >
+    <div th:if="${#fields.hasErrors('global')}">
+        <h3>Global errors:</h3>
+        <p th:each="err : ${#fields.errors('global')}" th:text="${err}" class="error"></p>
+    </div>
     <label id="lab_nombre"
            th:text="#{etiqueta_nombre}+': '"
            for="nombre"
@@ -57,6 +42,19 @@
            th:value="${clave}"
     />
     <th:block th:each="error : ${#fields.errors('clave')}">
+        <div th:text="${error}" class="error"></div>
+    </th:block>
+
+    <br/>
+    <label id="lab_valiClave"
+           th:text="#{etiqueta_valiClave}+': '"
+           for="valiClave"
+    />
+    <input th:field="*{valiClave}"
+           type="password"
+           th:value="${valiClave}"
+    />
+    <th:block th:each="error : ${#fields.errors('valiClave')}">
         <div th:text="${error}" class="error"></div>
     </th:block>
 
@@ -203,7 +201,7 @@
     </button>
 
 </form>
-
+<div th:replace="Fragmentos/footer"></div>
 </body>
 
 </html>

@@ -8,11 +8,11 @@ import java.lang.annotation.*;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
-@Target({ FIELD })
+@Target(ElementType.TYPE)
 @Retention(RUNTIME)
 @Constraint(validatedBy = ClaveValidator.class)
 @Documented
-public @interface Clave {
+public @interface ValidarClave {
 
     String message() default "Las contraseñas no coinciden.";
 
