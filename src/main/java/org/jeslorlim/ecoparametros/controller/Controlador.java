@@ -40,7 +40,6 @@ public class Controlador {
     public String recibeParametros(Model modelo,
                                    @Valid @ModelAttribute("formulario") Formulario datosFormulario,
                                    BindingResult resultadoVinculadoParametros){
-
         String mensajeEnFormulario;
         if (resultadoVinculadoParametros.hasErrors()) {
             mensajeEnFormulario = "El formulario tiene errores.";

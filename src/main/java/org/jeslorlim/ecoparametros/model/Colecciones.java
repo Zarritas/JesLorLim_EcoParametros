@@ -1,16 +1,12 @@
 package org.jeslorlim.ecoparametros.model;
 
-
 import java.util.HashMap;
 import java.util.Map;
-
 public class Colecciones {
     private static final Map<String, String> paises = new HashMap<>();
     private static final Map<String, String> generos = new HashMap<>();
     private static final Map<String, String> aficiones = new HashMap<>();
     private static final Map<String, String> musica = new HashMap<>();
-
-
     static {
         paises.put("ES", "España");
         paises.put("FR", "Francia");
@@ -31,7 +27,6 @@ public class Colecciones {
         musica.put("J","Jazz");
         musica.put("R","Reaggeton");
     }
-
     public static Map<String, String> leePaises() {
         return paises;
     }
@@ -44,5 +39,4 @@ public class Colecciones {
     public static Map<String, String> leeMusica() {
         return musica;
     }
-
 }
