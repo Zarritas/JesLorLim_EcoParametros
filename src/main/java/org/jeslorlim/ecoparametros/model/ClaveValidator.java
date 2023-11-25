@@ -1,5 +1,7 @@
 package org.jeslorlim.ecoparametros.model;
-import jakarta.validation.*;
+
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 
 class ClaveValidator implements ConstraintValidator<ValidarClave, Formulario> {
     @Override

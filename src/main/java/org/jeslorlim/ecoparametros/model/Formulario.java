@@ -15,7 +15,7 @@ public class Formulario {
     @NotBlank
     private String nombre;
     @Size(min = 6,max = 12, message = "La contraseña tiene que se entre 6 caracteres y 12 caracteres.")
-    @Pattern(regexp ="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]{6,12}", message = "la contraseña no es valida.")
+    @Pattern(regexp ="(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*\\p{Punct})[A-Za-z\\d\\p{Punct}]", message = "la contraseña no es valida.")
     private String clave;
     private String valiClave;
     private String descripcion;
@@ -31,4 +31,5 @@ public class Formulario {
     @Max(value = 67, message="La edad tiene que ser menor que 67 años.")
     private Integer edad;
     private Double pi;
+    private String archivo;
 }
