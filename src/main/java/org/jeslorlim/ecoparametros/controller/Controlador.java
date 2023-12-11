@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@RequestMapping("saludos")
+@RequestMapping("formulario")
 public class Controlador {
 
     @ModelAttribute("lista_generos")
@@ -31,7 +31,7 @@ public class Controlador {
         return leeMusica();
     }
 
-    @GetMapping("form")
+    @GetMapping("devuelve")
     public String formulario(@ModelAttribute("formulario") Formulario formulario){
         return "formulario";
     }
